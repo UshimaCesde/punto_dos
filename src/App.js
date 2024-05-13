@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import CountContext from "./CountContext";
+import EjemploComponente from "./EjemploComponente";
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Haz clic ${count} veces`;
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CountContext.Provider value={count}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <p>Haz hecho click {count} veces</p>
+        <button onClick={() => setCount(count + 1)}>Haz clic aquí</button>
+        <EjemploComponente />
+      </div>
+    </CountContext.Provider>
   );
 }
-
 export default App;
